@@ -46,83 +46,174 @@ $pass = '';
         $select = $bdd->prepare("SELECT * from user WHERE nom ='Conor'");
         $ref = $select->execute();
 
+        echo "<div class='info'> Utilisateur(s) dont le nom est connor : <br>";
         if($ref) {
             foreach ($select->fetchAll() as $user){
-                echo "<div> Utilisateur(s) dont le nom est connor : ".$user['prenom']." ".$user['nom']."</div>";
+                echo $user['prenom']." ".$user['nom'];
             }
         }
-
+        echo "</div>";
     /* 2. Sélectionnez et affichez tous les utilisateurs dont le prénom est différent de 'John' */
     // TODO Votre code ici.
         $select = $bdd->prepare("SELECT * from user WHERE prenom !='John'");
         $ref = $select->execute();
-        echo "<br><div> Utilisateur(s) dont le prénom n'est pas John : ";
+        echo "<br><div class='info'> Utilisateur(s) dont le prénom n'est pas John : ";
         if($ref) {
             foreach ($select->fetchAll() as $user){
                 echo "<div>".$user['prenom']." ".$user['nom']."</div>";
             }
         }
-
+        echo "</div>";
     /* 3. Sélectionnez et affichez tous les utilisateurs dont l'id est plus petit ou égal à 2 */
     // TODO Votre code ici.
         $select = $bdd->prepare("SELECT * from user WHERE id <= 2");
         $ref = $select->execute();
-        echo "<br><div> Utilisateur(s) dont l'id est inférieur ou égal à 2 : ";
+        echo "<br><div class='info'> Utilisateur(s) dont l'id est inférieur ou égal à 2 : ";
         if($ref) {
             foreach ($select->fetchAll() as $user){
-                echo "<div>".$user['prenom']." ".$user['nom']."</div>";
+                echo "<div>".$user['id']." ".$user['prenom']." ".$user['nom']."</div>";
             }
         }
+        echo "</div>";
 
     /* 4. Sélectionnez et affichez tous les utilisateurs dont l'id est plus grand ou égal à 2 */
     // TODO Votre code ici.
         $select = $bdd->prepare("SELECT * from user WHERE id >= 2");
         $ref = $select->execute();
-        echo "<br><div> Utilisateur(s) dont l'id est supérieur ou égal à 2 : ";
+        echo "<br><div class='info'> Utilisateur(s) dont l'id est supérieur ou égal à 2 : ";
         if($ref) {
             foreach ($select->fetchAll() as $user){
-                echo "<div>".$user['prenom']." ".$user['nom']."</div>";
+                echo "<div>".$user['id']." ".$user['prenom']." ".$user['nom']."</div>";
             }
         }
-
+        echo "</div>";
     /* 5. Sélectionnez et affichez tous les utilisateurs dont l'id est égal à 1 */
     // TODO Votre code ici.
         $select = $bdd->prepare("SELECT * from user WHERE id = 1");
         $ref = $select->execute();
-        echo "<br><div> Utilisateur(s) dont l'id est égal à 1 : ";
+        echo "<br><div class='info'> Utilisateur(s) dont l'id est égal à 1 : ";
+        if($ref) {
+            foreach ($select->fetchAll() as $user){
+                echo "<div>".$user['id']." ".$user['prenom']." ".$user['nom']."</div>";
+            }
+        }
+        echo "</div>";
+
+    /* 6. Sélectionnez et affichez tous les utilisateurs dont l'id est plus grand que 1 ET le nom est égal à 'Doe' */
+    // TODO Votre code ici.
+
+        $select = $bdd->prepare("SELECT * from user WHERE id > 1 AND nom = 'Doe'");
+        $ref = $select->execute();
+        echo "<br><div class='info'> Utilisateur(s) dont l'id est sup à 1 et dont le nom est Doe: ";
+        if($ref) {
+            foreach ($select->fetchAll() as $user){
+                echo "<div>".$user['id']." ".$user['prenom']." ".$user['nom']."</div>";
+            }
+        }
+        echo "</div>";
+    /* 7. Sélectionnez et affichez tous les utilisateurs dont le nom est 'Doe' ET le prénom est 'John'*/
+    // TODO Votre code ici.
+
+        $select = $bdd->prepare("SELECT * from user WHERE nom = 'Doe' AND prenom = 'John'");
+        $ref = $select->execute();
+        echo "<br><div class='info'> Utilisateur(s) dont le nom est 'Doe' ET le prénom est 'John' : ";
         if($ref) {
             foreach ($select->fetchAll() as $user){
                 echo "<div>".$user['prenom']." ".$user['nom']."</div>";
             }
         }
-
-
-    /* 6. Sélectionnez et affichez tous les utilisateurs dont l'id est plus grand que 1 ET le nom est égal à 'Doe' */
-    // TODO Votre code ici.
-
-    /* 7. Sélectionnez et affichez tous les utilisateurs dont le nom est 'Doe' ET le prénom est 'John'*/
-    // TODO Votre code ici.
+        echo "</div>";
 
     /* 8. Sélectionnez et affichez tous les utilisateurs dont le nom est 'Conor' OU le prénom est 'Jane' */
     // TODO Votre code ici.
 
+        $select = $bdd->prepare("SELECT * from user WHERE nom = 'Conor' OR prenom = 'Jane'");
+        $ref = $select->execute();
+        echo "<br><div class='info'> Utilisateur(s) dont le nom est 'Conor' OU le prénom est 'Jane' : ";
+        if($ref) {
+            foreach ($select->fetchAll() as $user){
+                echo "<div>".$user['prenom']." ".$user['nom']."</div>";
+            }
+        }
+        echo "</div>";
+
     /* 9. Sélectionnez et affichez tous les utilisateurs en limitant les réultats à 2 résultats */
     // TODO Votre code ici.
+
+        $select = $bdd->prepare("SELECT * from user LIMIT 2");
+        $ref = $select->execute();
+        echo "<br><div class='info'> Utilisateur(s) en limitant les réultats à 2 : ";
+        if($ref) {
+            foreach ($select->fetchAll() as $user){
+                echo "<div>".$user['prenom']." ".$user['nom']."</div>";
+            }
+        }
+        echo "</div>";
 
     /* 10. Sélectionnez et affichez tous les utilisateurs par ordre croissant, en limitant le résultat à 1 seul enregistrement */
     // TODO Votre code ici.
 
+        $select = $bdd->prepare("SELECT * from user ORDER BY nom ASC LIMIT 1");
+        $ref = $select->execute();
+        echo "<br><div class='info'> Utilisateur(s) par ordre croissant, en limitant le résultat à 1 seul enregistrement : ";
+        if($ref) {
+            foreach ($select->fetchAll() as $user){
+                echo "<div>".$user['prenom']." ".$user['nom']."</div>";
+            }
+        }
+        echo "</div>";
+
     /* 11. Sélectionnez et affichez tous les utilisateurs dont le nom commence par C, fini par r et contient 5 caractères ( voir LIKE )*/
     // TODO Votre code ici.
+
+        $select = $bdd->prepare("SELECT * from user WHERE nom LIKE 'C___r'");
+        $ref = $select->execute();
+        echo "<br><div class='info'> Utilisateur(s) dont le nom commence par C, fini par r et contient 5 caractères : ";
+        if($ref) {
+            foreach ($select->fetchAll() as $user){
+                echo "<div>".$user['prenom']." ".$user['nom']."</div>";
+            }
+        }
+        echo "</div>";
 
     /* 12. Sélectionnez et affichez tous les utilisateurs dont le nom contient au moins un 'e' */
     // TODO Votre code ici.
 
+        $select = $bdd->prepare("SELECT * from user WHERE nom LIKE '%e%'");
+        $ref = $select->execute();
+        echo "<br><div class='info'> Utilisateur(s) dont le nom contient au moins un 'e' : ";
+        if($ref) {
+            foreach ($select->fetchAll() as $user){
+                echo "<div>".$user['prenom']." ".$user['nom']."</div>";
+            }
+        }
+        echo "</div>";
+
     /* 13. Sélectionnez et affichez tous les utilisateurs dont le prénom est ( IN ) (John, Sarah) ... voir IN , pas OR '' */
     // TODO Votre code ici.
 
+        $select = $bdd->prepare("SELECT * from user WHERE prenom IN ('John', 'Sarah')");
+        $ref = $select->execute();
+        echo "<br><div class='info'> Utilisateur(s) dont le prénom est ( IN ) (John, Sarah) : ";
+        if($ref) {
+            foreach ($select->fetchAll() as $user){
+                echo "<div>".$user['prenom']." ".$user['nom']."</div>";
+            }
+        }
+        echo "</div>";
+
     /* 14. Sélectionnez et affichez tous les utilisateurs dont l'id est situé entre 2 et 4 */
     // TODO Votre code ici.
+
+        $select = $bdd->prepare("SELECT * from user WHERE id BETWEEN 2 AND 4");
+        $ref = $select->execute();
+        echo "<br><div class='info'> Utilisateur(s) dont l'id est situé entre 2 et 4 : ";
+        if($ref) {
+            foreach ($select->fetchAll() as $user){
+                echo "<div>".$user['id']." ".$user['prenom']." ".$user['nom']."</div>";
+            }
+        }
+        echo "</div>";
 
     }
     catch (PDOException $exception) {
